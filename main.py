@@ -28,7 +28,7 @@ for i in range(0,dict.__len__(admins)):
         #get the password for the account encoded in base64
         pswrd = input("To verify that you are an Admin, Please enter your password:\n")
         pswrd = base64.b64encode(pswrd.encode("utf-8")).decode('utf-8')
-        if pswrd ==  dict.get(dict.get(admins,admintocheck),"password"): 
+        if pswrd == dict.get(dict.get(admins,admintocheck),"password"): 
 
             #log in the user as Admin
             print("Welcome:",name,"\nRank: Admin")
