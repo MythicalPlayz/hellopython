@@ -4,6 +4,7 @@
 
 #import the json file with the admins
 import json
+import base64
 f = open("admins.json")
 admins = json.load(f)
 
@@ -24,12 +25,13 @@ for i in range(0,dict.__len__(admins)):
        adminname = dict.get(dict.get(admins,admintocheck),"name")
        if adminname == name:
 
-        #get the password for the account
+        #get the password for the account encoded in base64
         pswrd = input("To verify that you are an Admin, Please enter your password:\n")
-        if pswrd == dict.get(dict.get(admins,admintocheck),"password"):
+        pswrd = base64.b64encode(pswrd.encode("utf-8")).decode('utf-8')
+        if pswrd ==  dict.get(dict.get(admins,admintocheck),"password"): 
 
             #log in the user as Admin
-            print("Welcome: ",name,"\nRank: Admin")
+            print("Welcome:",name,"\nRank: Admin")
             loggedin = True
             break
         else:
@@ -42,7 +44,7 @@ for i in range(0,dict.__len__(admins)):
 if not loggedin:
 
     #log in the user as a user
-    print("Welcome: ",name,"\nRank: User")
+    print("Welcome:",name,"\nRank: User")
 
 #flush memory
 f.flush()
